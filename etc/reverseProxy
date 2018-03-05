@@ -1,0 +1,21 @@
+upstream app_servers {
+ server 127.0.0.1:8080;
+}
+
+server {
+ location / {
+  root /home/vs/web;
+ }
+
+ location ^~ /uploads/ {
+  root /home/vs/web;
+ }
+
+ location /hello/ {
+  proxy_pass http://app_servers;
+ }
+
+ location ~ ^.+\.\w+$ {
+  root /home/vs/web/public;
+ }
+}
