@@ -6,4 +6,4 @@ def echo(environ, start_response):
 	request = environ['QUERY_STRING']
 	request_list = request.split('&')
 	start_response(status, headers)
-	return ["\n".join(request_list)]
+	return ["\n".join(request_list).encode('utf-8')]
