@@ -4,11 +4,11 @@ upstream app_servers {
 
 server {
  location / {
-  root /home/vs/web;
+  root /home/box/web;
  }
 
  location ^~ /uploads/ {
-  root /home/vs/web;
+  root /home/box/web;
  }
 
  location /hello/ {
@@ -16,6 +16,6 @@ server {
  }
 
  location ~ ^.+\.\w+$ {
-  root /home/vs/web/public;
+  root /home/box/web/public;
  }
 }
