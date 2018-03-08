@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo cp /home/box/web/etc/django  /etc/nginx/sites-available/default
+sudo mv /home/box/web/etc/django  /etc/nginx/sites-available/default
 sudo ln -sf /etc/nginx/sites-available/django /etc/nginx/sites-enabled/
 sudo /etc/init.d/nginx restart
 # sudo /etc/init.d/gunicorn restart
