@@ -25,7 +25,7 @@ SECRET_KEY = 'hdv(q_vqlb$x_bl@km_ydj=*#1_w94#jr$f)sn6@i7wkgpsp--'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
