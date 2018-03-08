@@ -1,14 +1,6 @@
-upstream app_servers {
- server 0.0.0.0:8080;
-}
-
-upstream django_servers {
- server 0.0.0.0:8000;
-}
-
 server {
  location / {
-  proxy_pass http://django_servers;
+  proxy_pass http://0.0.0.0:8000;
  }
 
  location ^~ /uploads/ {
@@ -16,7 +8,7 @@ server {
  }
 
  location /echo/ {
-  proxy_pass http://app_servers;
+  proxy_pass http://0.0.0.0:8080;
  }
 
  location ~ ^.+\.\w+$ {
