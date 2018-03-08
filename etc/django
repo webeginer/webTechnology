@@ -1,0 +1,25 @@
+upstream app_servers {
+ server 127.0.0.1:8080;
+}
+
+upstream django_servers {
+ server 127.0.0.1:8000;
+}
+
+server {
+ location / {
+  proxy_pass http://django_servers;
+ }
+
+ location ^~ /uploads/ {
+  root /home/vs/web;
+ }
+
+ location /echo/ {
+  proxy_pass http://app_servers;
+ }
+
+ location ~ ^.+\.\w+$ {
+  root /home/vs/web/public;
+ }
+}
