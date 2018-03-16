@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt-get update
 sudo ﻿ln -s /home/box/web/etc/django  /etc/nginx/sites-enabled/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/
