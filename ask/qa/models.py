@@ -4,7 +4,7 @@
 
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 
 
 
@@ -23,23 +23,17 @@ from django.contrib.auth.models import AbstractUser
 # question - вопрос, к которому относится ответ
 # author - автор ответа
 
-class User(AbstractUser):
-	username = models.CharField(
-		'username',
-		max_length=10,
-		unique=True,
-		db_index=True
-		)
-	email = models.EmailField(
-		'email address',
-		unique=True
-		)
-	joined = models.DateTimeField(auto_now_add=True)
-	is_active = models.BooleanField(default=True)
-	is_admin = models.BooleanField(default=False)
-	USERNAME_FIELD = 'username'
-	def __str__(self):
-		return self.username
+
+class QuestionManager(models.Manager):
+		"""new - метод возвращающий
+		 последние добавленные вопросы
+		 popular - метод возвращающий
+		 вопросы отсортированные по
+		 рейтингу"""
+		def new(self):
+			return self.order_by('-title')
+		def popular(self):
+			return self.order_by('rating')		
 
 
 class Question(models.Model):
@@ -57,20 +51,6 @@ class Question(models.Model):
 		blank=True,
 	)
 	objects = QuestionManager()
-
-	class QuestionManager(models.Manager):
-		"""new - метод возвращающий
-		 последние добавленные вопросы
-		 popular - метод возвращающий
-		 вопросы отсортированные по
-		 рейтингу"""
-		def new(self):
-			return self.order_by('-title')
-		def popular(self):
-			return self.order_by('rating')		
-			
-	def __str__(self): 
-		return self.title
 
 
 class Answer(models.Model): 
