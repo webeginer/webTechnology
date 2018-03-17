@@ -31,14 +31,14 @@ class QuestionManager(models.Manager):
 		 вопросы отсортированные по
 		 рейтингу"""
 		def new(self):
-			return self.order_by('-title')
+			return self.order_by('-added_at')
 		def popular(self):
 			return self.order_by('rating')		
 
 
 class Question(models.Model):
 	title = models.CharField(max_length=100)
-	text = models.CharField(max_length=400)
+	text = models.TextField()
 	added_at = models.DateTimeField('date published')
 	rating = models.IntegerField(default=0)
 	author = models.ForeignKey(
@@ -54,7 +54,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model): 
-	text = models.CharField(max_length=400)
+	text = models.TextField()
 	added_at = models.DateTimeField('date answer')
 	question = models.ForeignKey(
 		Question,
