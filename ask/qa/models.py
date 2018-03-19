@@ -40,7 +40,10 @@ class QuestionManager(models.Manager):
 class Question(models.Model):
 	title = models.CharField(max_length=100)
 	text = models.TextField()
-	added_at = models.DateTimeField('date published')
+	added_at = models.DateTimeField(
+		'date published',
+		auto_now_add=True,
+		)
 	rating = models.IntegerField(default=0)
 	author = models.ForeignKey(
 		User,
@@ -56,12 +59,15 @@ class Question(models.Model):
 
 class Answer(models.Model): 
 	text = models.TextField()
-	added_at = models.DateTimeField('date answer')
+	added_at = models.DateTimeField(
+		'date published',
+		auto_now_add=True,
+		)
 	question = models.ForeignKey(
 		Question,
 		related_name='answer_question',
 	)
-	author = models.ManyToManyField(
+	author = models.ForeignKey(
 		User,
 		related_name='answer_author',
 		)
