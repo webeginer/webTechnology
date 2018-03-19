@@ -48,6 +48,7 @@ class Question(models.Model):
 	author = models.ForeignKey(
 		User,
 		related_name='question_author',
+		null=True,
 		)
 	likes = models.ManyToManyField(
 		User,
@@ -70,6 +71,7 @@ class Answer(models.Model):
 	author = models.ForeignKey(
 		User,
 		related_name='answer_author',
+		null=True,
 		)
 	def __str__(self):
 		return self.text
