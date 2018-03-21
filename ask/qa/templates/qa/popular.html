@@ -1,0 +1,25 @@
+<h1>Список популярных вопросов</h1>
+
+{% if popular_question_list %}
+<ul>
+	{% for question in popular_question_list %}
+		<li><a href="{% url 'qa:question' question.id %}">{{ question.title }}</a></li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No qa are availabele.</p>
+{% endif %}
+
+<nav>
+	<ul>
+	{% for number_page in paginator.page_range %}
+		{% if number_page == page.number %}
+			<li style="color: red{{ question.id }}">
+		{% else %}		
+			<li>
+		{% endif %}
+				<a href="{{ paginator.baseurl }}{{ number_page }}">{{ number_page }}</a>
+			</li>
+	{% endfor %}
+	</ul>
+</nav>

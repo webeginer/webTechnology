@@ -1,0 +1,12 @@
+<h1>{{ question.title }}</h1>
+<p>{{ question.text }}</p>
+<h2>Ответы</h2>
+{% if answers %}
+<ul>
+	{% for answer in answers %}
+		<li>{{ answer.question.text }}</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>Ваш ответ станет первым!</p>
+{% endif %}
