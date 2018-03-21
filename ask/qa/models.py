@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
-
-
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -16,13 +11,6 @@ from django.utils import timezone
 # rating - рейтинг вопроса (число)
 # author - автор вопроса
 # likes - список пользователей, поставивших "лайк"
-
-
-# Answer - ответ
-# text - текст ответа
-# added_at - дата добавления ответа
-# question - вопрос, к которому относится ответ
-# author - автор ответа
 
 
 class QuestionManager(models.Manager):
@@ -56,6 +44,13 @@ class Question(models.Model):
 		blank=True,
 	)
 	objects = QuestionManager()
+
+
+# Answer - ответ
+# text - текст ответа
+# added_at - дата добавления ответа
+# question - вопрос, к которому относится ответ
+# author - автор ответа
 
 
 class Answer(models.Model): 
