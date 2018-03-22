@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -43,6 +45,12 @@ class Question(models.Model):
 		related_name='question_likes',
 		blank=True,
 	)
+	def get_url(self):
+		return reverse('qa:question', kwargs={'id': self.id})
+	def __str__(self):
+		return self.title
+	def __str__(self):
+		return self.text
 	objects = QuestionManager()
 
 
