@@ -43,9 +43,7 @@ def popular(request):
 @require_GET
 def question(request, question_id):
 	question = get_object_or_404(Question, pk=question_id)
-	answers = Answer.objects.filter(question=question.id)
 	context = {
 	'question':	question,
-	'answers':	answers,
 	}
 	return render(request, 'qa/question.html', context)
