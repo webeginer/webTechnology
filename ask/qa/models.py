@@ -78,3 +78,5 @@ class Answer(models.Model):
 		related_name='answer_author',
 		null=True,
 		)
+	def __str__(self):
+		return self.text
