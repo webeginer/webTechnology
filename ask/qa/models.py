@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+# from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-# from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse
+
 
 
 # Question - вопрос
@@ -27,32 +29,6 @@ class QuestionManager(models.Manager):
 			return self.order_by('rating')		
 
 
-# class Question(models.Model):
-# 	title = models.CharField(max_length=100)
-# 	text = models.TextField()
-# 	added_at = models.DateTimeField(
-# 		'date published',
-# 		auto_now_add=True,
-# 		)
-# 	rating = models.IntegerField(default=0)
-# 	author = models.ForeignKey(
-# 		User,
-# 		related_name='question_author',
-# 		null=True,
-# 		)
-# 	likes = models.ManyToManyField(
-# 		User,
-# 		related_name='question_likes',
-# 		blank=True,
-# 	)
-# 	def get_url(self):
-# 		return reverse('qa:question', kwargs={'id': self.id})
-# 	def __str__(self):
-# 		return self.title
-# 	def __str__(self):
-# 		return self.text
-# 	objects = QuestionManager()
-
 class Question(models.Model):
 	title = models.CharField(max_length=100)
 	text = models.TextField()
@@ -63,6 +39,7 @@ class Question(models.Model):
 	rating = models.IntegerField(default=0)
 	author = models.ForeignKey(
 		User,
+		on_delete=models.CASCADE,
 		related_name='question_author',
 		null=True,
 		)
@@ -70,13 +47,19 @@ class Question(models.Model):
 		User,
 		related_name='question_likes',
 		blank=True,
-	)
-	objects = QuestionManager()
-Answer - ответ
-text - текст ответа
-added_at - дата добавления ответа
-question - вопрос, к которому относится ответ
-author - автор ответа
+		)
+	def __str__(self):
+		return self.title
+	def __str__(self):
+		return self.text
+
+
+
+# Answer - ответ
+# text - текст ответа
+# added_at - дата добавления ответа
+# question - вопрос, к которому относится ответ
+# author - автор ответа
 
 
 class Answer(models.Model): 
@@ -87,12 +70,11 @@ class Answer(models.Model):
 		)
 	question = models.ForeignKey(
 		Question,
-		related_name='answer_question',
-	)
+		on_delete=models.CASCADE,
+		)
 	author = models.ForeignKey(
 		User,
+		on_delete=models.CASCADE,
 		related_name='answer_author',
 		null=True,
 		)
-	def __str__(self):
-		return self.text
