@@ -26,7 +26,7 @@ class QuestionManager(models.Manager):
 		def new(self):
 			return self.order_by('-added_at')
 		def popular(self):
-			return self.order_by('rating')		
+			return self.order_by('-rating')		
 
 
 class Question(models.Model):
@@ -52,6 +52,7 @@ class Question(models.Model):
 		return self.title
 	def __str__(self):
 		return self.text
+	objects = QuestionManager() 
 
 
 

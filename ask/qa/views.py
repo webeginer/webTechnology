@@ -27,7 +27,7 @@ def index(request):
 
 @require_GET
 def popular(request):
-	popular_question_list = Question.objects.order_by('rating')
+	popular_question_list = Question.objects.order_by('-rating')
 	limit = request.GET.get('limit', 10)
 	page = request.GET.get('page', 1)
 	paginator = Paginator(popular_question_list, limit)
