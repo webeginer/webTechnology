@@ -3,6 +3,6 @@
 <h2>Ответы</h2>
 <ul>
 	{% for answer in question.answer_set.all %}
-		<li>{{ answer.question.text }}</li>
+		<li>{{ answer.text }}</li>
 	{% endfor %}
 </ul>
