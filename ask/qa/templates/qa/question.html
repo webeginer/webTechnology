@@ -6,3 +6,18 @@
 		<li>{{ answer.text }}</li>
 	{% endfor %}
 </ul>
+{% for errors in form.non_field_errors %}
+<div>{{ errors }}</div>
+{% endfor %}
+<form method="post" action="{% url 'qa:question' question.id %}">
+{% csrf_token %}
+	<fieldset>
+		{% for field in form %}
+		<div>
+			<label>{{ field.label }}</label>
+			<div>{{ field }}</div>
+		</div>
+		{% endfor %}
+	</fieldset>
+	<button type="submit">Отправить</button>
+</form>

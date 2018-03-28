@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-
 
 
 # Question - вопрос
@@ -15,19 +13,6 @@ from django.core.urlresolvers import reverse
 # rating - рейтинг вопроса (число)
 # author - автор вопроса
 # likes - список пользователей, поставивших "лайк"
-
-
-class QuestionManager(models.Manager):
-		"""new - метод возвращающий
-		 последние добавленные вопросы
-		 popular - метод возвращающий
-		 вопросы отсортированные по
-		 рейтингу"""
-		def new(self):
-			return self.order_by('-added_at')
-		def popular(self):
-			return self.order_by('-rating')		
-
 
 class Question(models.Model):
 	title = models.CharField(max_length=100)
@@ -49,11 +34,16 @@ class Question(models.Model):
 		blank=True,
 		)
 	def __str__(self):
-		return self.title
-	def __str__(self):
-		return self.text
-	objects = QuestionManager() 
-
+		return '%s %s' % (self.title, self.text)
+	def save(self, *args, **kwargs):
+        	if self.author is None:
+            		self.author = User.objects.get_or_create(
+							username='guest',
+							defaults={
+								'password':'guestpassword',
+								'last_login': timezone.now(),
+							})[0]
+        	super(Question, self).save(*args, **kwargs)
 
 
 # Answer - ответ
@@ -61,7 +51,6 @@ class Question(models.Model):
 # added_at - дата добавления ответа
 # question - вопрос, к которому относится ответ
 # author - автор ответа
-
 
 class Answer(models.Model): 
 	text = models.TextField()
