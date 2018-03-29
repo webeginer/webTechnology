@@ -51,7 +51,8 @@ def question(request, question_id):
 		form = AnswerForm(request.POST)
 		if form.is_valid():
 			answer = form.save()
-			return HttpResponseRedirect(reverse('qa:question', args=[question_id]))
+			return render('OK')
+			# return HttpResponseRedirect(reverse('qa:question', args=[question_id]))
 	else:
 		form = AnswerForm()
 		form.fields['question'] = forms.ModelChoiceField(Question.objects.filter(pk=question_id).values_list('id', flat=True), label='на вопрос №', empty_label=None)
