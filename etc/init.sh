@@ -1,13 +1,13 @@
 #!/bin/bash
-sudo apt-get update
-sudo apt-get upgrade
+# sudo apt-get update
+# sudo apt-get upgrade
 sudo rm /etc/nginx/sites-enabled/default
 sudo ﻿cp /home/box/web/etc/django  /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/
 sudo /etc/init.d/nginx restart
-
 # sudo /etc/init.d/gunicorn restart
 # вызвать команду в корне проекта, где находиться файл manage.py
+# python manage.py runserver 0.0.0.0:8000
 # gunicorn ask.wsgi:application --bind 127.0.0.1:8000
 sudo /etc/init.d/mysql start
 mysql -u root
@@ -23,9 +23,10 @@ mysql -u root
 # python manage.py check
 # python manage.py makemigrations
 # python manage.py migrate
+
+# создать таблицу базы данных в качестве кэша с помощью следующей команды:
 # python manage.py createcachetable
 # show tables in database_ask;
 
 
 
-sudo apt-get install lynx
