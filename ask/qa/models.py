@@ -35,15 +35,7 @@ class Question(models.Model):
 		)
 	def __str__(self):
 		return '%s %s' % (self.title, self.text)
-	def save(self, *args, **kwargs):
-        	if self.author is None:
-            		self.author = User.objects.get_or_create(
-							username='guest',
-							defaults={
-								'password':'guestpassword',
-								'last_login': timezone.now(),
-							})[0]
-        	super(Question, self).save(*args, **kwargs)
+		
 
 
 # Answer - ответ

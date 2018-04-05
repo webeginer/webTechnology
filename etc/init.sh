@@ -1,14 +1,14 @@
 #!/bin/bash
 sudo apt-get update
+sudo apt-get upgrade
 sudo rm /etc/nginx/sites-enabled/default
-sudo ﻿cp /home/box/web/etc/django  /etc/nginx/sites-available/django
+sudo ﻿cp /home/box/web/etc/django  /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/django /etc/nginx/sites-enabled/
 sudo /etc/init.d/nginx restart
 
 # sudo /etc/init.d/gunicorn restart
 # вызвать команду в корне проекта, где находиться файл manage.py
 # gunicorn ask.wsgi:application --bind 127.0.0.1:8000
-
 sudo /etc/init.d/mysql start
 mysql -u root
 # create database database_ask;
@@ -18,8 +18,14 @@ mysql -u root
 # grant all privileges on *.* to 'vs'@'%';
 # flush privileges;
 # sudo ﻿ln -s /home/box/web/etc/mysqld.cnf /etc/mysql/my.cnf
+# drop database database_ask;
 
 # python manage.py check
-# python manage.py makemigrations qa
+# python manage.py makemigrations
 # python manage.py migrate
+# python manage.py createcachetable
 # show tables in database_ask;
+
+
+
+sudo apt-get install lynx

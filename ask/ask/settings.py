@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'autofixture',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ask.urls'
+
+LOGIN_REDIRECT_URL = 'qa:index'
 
 TEMPLATES = [
     {
@@ -79,8 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'database_ask',
         'USER': 'vs',
+        'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 
@@ -103,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'auth.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
